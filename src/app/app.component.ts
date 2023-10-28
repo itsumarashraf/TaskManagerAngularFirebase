@@ -46,9 +46,9 @@ export class AppComponent {
         return;
       }
       if (result.delete) {
-        this.store.collection('todo').doc(result.task.id).delete();
+        this.store.collection(list).doc(result.task.id).delete();
       } else {
-        this.store.collection('todo').doc(result.task.id).update('todo');
+        this.store.collection(list).doc(result.task.id).update(task);
       }
     });
   }
@@ -62,7 +62,7 @@ export class AppComponent {
     }
 
     const item = event.previousContainer.data[event.previousIndex];
-  this.store.firestore.runTransaction(() => {
+    this.store.firestore.runTransaction(() => {
     const promise = Promise.all([
       this.store.collection(event.previousContainer.id).doc(item.id).delete(),
       this.store.collection(event.container.id).add(item),
@@ -90,13 +90,14 @@ export class AppComponent {
     dialogRef
       .afterClosed()
       .subscribe((result: TaskDialogResult|undefined) => {
+        console.log('after close result ',result)
         if (!result) {
           return;
         }
        if (result.delete) {
         this.store.collection('todo').doc(result.task.id).delete();
       } else {
-        this.store.collection('todo').doc(result.task.id).update('todo');
+        this.store.collection('todo').add(result.task)
       }
       });
   }
