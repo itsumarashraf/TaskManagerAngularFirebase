@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "kanbantaskmanager-c86c1": {
+      "hosting": {
+        "kanban-fire": [
+          "kanbantaskmanager-c86c1"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "kanbantaskmanager-c86c1"
+  }
+}
